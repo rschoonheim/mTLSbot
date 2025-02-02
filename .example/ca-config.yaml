@@ -1,0 +1,17 @@
+serial-number: 1
+subject:
+  organization: "Example Inc."
+  organization-unit: "Example Unit"
+  country: "US"
+  province: "California"
+  locality: "San Francisco"
+  streetAddress: "1234 Example St."
+  postalCode: "94105"
+not-before: "2006-01-02T15:04:05Z"
+not-after: "2006-01-02T15:04:05Z"
+is-ca: true
+ext-key-usage:
+  - 1
+  - 0
+key-usage: 5
+basic-constraints-validity: true
