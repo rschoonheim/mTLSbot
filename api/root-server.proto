@@ -4,17 +4,11 @@ package rschoonheim.mtls.v1.root_server;
 
 option go_package = "cmd/root_server/v1/services;root_server_v1";
 
-message RootServerInstallRequest {
-  // storage_path - the path where the root server should store its data.
-  string storage_path = 1;
-}
+message RootServerConfiguration {
 
-// InstallResponse - response to the Install request.
-message RootServerInstallResponse {
-  bool success = 1;
 }
 
 service RootServer {
-  // Install - installs the root server.
-  rpc Install(RootServerInstallRequest) returns (RootServerInstallResponse);
+  // GetRootServerConfiguration - returns the current configuration of the root server.
+  rpc GetRootServerConfiguration (RootServerConfiguration) returns (RootServerConfiguration) {}
 }

@@ -8,9 +8,9 @@ import (
 
 type RootServerService struct{}
 
-// Install - Installs the root server.
-func (rs RootServerService) Install(context.Context, *RootServerInstallRequest) (*RootServerInstallResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Install not implemented")
+// GetRootServerConfiguration - returns the current configuration of the root server.
+func (rs RootServerService) GetRootServerConfiguration(context.Context, *RootServerConfiguration) (*RootServerConfiguration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRootServerConfiguration not implemented")
 }
 
 func (rs RootServerService) mustEmbedUnimplementedRootServerServer() {}

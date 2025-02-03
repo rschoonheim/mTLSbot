@@ -6,6 +6,7 @@ import (
 )
 
 type args struct {
+	InstallCli *commands.InstallCliCmd `arg:"subcommand:install"`
 	GenerateCa *commands.GenerateCaCmd `arg:"subcommand:generate-ca"`
 }
 
@@ -22,6 +23,8 @@ func main() {
 	arg.MustParse(&args)
 
 	switch {
+	case args.InstallCli != nil:
+		commands.InstallCli(args.InstallCli)
 	case args.GenerateCa != nil:
 		commands.GenerateCa(args.GenerateCa)
 	}

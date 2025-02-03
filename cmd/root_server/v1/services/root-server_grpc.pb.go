@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RootServer_Install_FullMethodName = "/rschoonheim.mtls.v1.root_server.RootServer/Install"
+	RootServer_GetRootServerConfiguration_FullMethodName = "/rschoonheim.mtls.v1.root_server.RootServer/GetRootServerConfiguration"
 )
 
 // RootServerClient is the client API for RootServer service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RootServerClient interface {
-	// Install - installs the root server.
-	Install(ctx context.Context, in *RootServerInstallRequest, opts ...grpc.CallOption) (*RootServerInstallResponse, error)
+	// GetRootServerConfiguration - returns the current configuration of the root server.
+	GetRootServerConfiguration(ctx context.Context, in *RootServerConfiguration, opts ...grpc.CallOption) (*RootServerConfiguration, error)
 }
 
 type rootServerClient struct {
@@ -38,10 +38,10 @@ func NewRootServerClient(cc grpc.ClientConnInterface) RootServerClient {
 	return &rootServerClient{cc}
 }
 
-func (c *rootServerClient) Install(ctx context.Context, in *RootServerInstallRequest, opts ...grpc.CallOption) (*RootServerInstallResponse, error) {
+func (c *rootServerClient) GetRootServerConfiguration(ctx context.Context, in *RootServerConfiguration, opts ...grpc.CallOption) (*RootServerConfiguration, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RootServerInstallResponse)
-	err := c.cc.Invoke(ctx, RootServer_Install_FullMethodName, in, out, cOpts...)
+	out := new(RootServerConfiguration)
+	err := c.cc.Invoke(ctx, RootServer_GetRootServerConfiguration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -52,8 +52,8 @@ func (c *rootServerClient) Install(ctx context.Context, in *RootServerInstallReq
 // All implementations must embed UnimplementedRootServerServer
 // for forward compatibility.
 type RootServerServer interface {
-	// Install - installs the root server.
-	Install(context.Context, *RootServerInstallRequest) (*RootServerInstallResponse, error)
+	// GetRootServerConfiguration - returns the current configuration of the root server.
+	GetRootServerConfiguration(context.Context, *RootServerConfiguration) (*RootServerConfiguration, error)
 	mustEmbedUnimplementedRootServerServer()
 }
 
@@ -64,8 +64,8 @@ type RootServerServer interface {
 // pointer dereference when methods are called.
 type UnimplementedRootServerServer struct{}
 
-func (UnimplementedRootServerServer) Install(context.Context, *RootServerInstallRequest) (*RootServerInstallResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Install not implemented")
+func (UnimplementedRootServerServer) GetRootServerConfiguration(context.Context, *RootServerConfiguration) (*RootServerConfiguration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRootServerConfiguration not implemented")
 }
 func (UnimplementedRootServerServer) mustEmbedUnimplementedRootServerServer() {}
 func (UnimplementedRootServerServer) testEmbeddedByValue()                    {}
@@ -88,20 +88,20 @@ func RegisterRootServerServer(s grpc.ServiceRegistrar, srv RootServerServer) {
 	s.RegisterService(&RootServer_ServiceDesc, srv)
 }
 
-func _RootServer_Install_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RootServerInstallRequest)
+func _RootServer_GetRootServerConfiguration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RootServerConfiguration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RootServerServer).Install(ctx, in)
+		return srv.(RootServerServer).GetRootServerConfiguration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: RootServer_Install_FullMethodName,
+		FullMethod: RootServer_GetRootServerConfiguration_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RootServerServer).Install(ctx, req.(*RootServerInstallRequest))
+		return srv.(RootServerServer).GetRootServerConfiguration(ctx, req.(*RootServerConfiguration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -114,8 +114,8 @@ var RootServer_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RootServerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Install",
-			Handler:    _RootServer_Install_Handler,
+			MethodName: "GetRootServerConfiguration",
+			Handler:    _RootServer_GetRootServerConfiguration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
