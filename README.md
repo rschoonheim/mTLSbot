@@ -7,6 +7,7 @@ use. The tool is written in Go and uses the `crypto/x509` package to generate ce
 
 ## Using mTLS bot
 
+
 ### 1. Creating the root Certificate Authority
 
 ### 1.2 Creating an intermediate Certificate Authority (optional)
